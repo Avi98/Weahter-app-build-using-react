@@ -2,21 +2,11 @@ import React,{Component} from 'react';
 import WeatherFrom from './weatherForm';
 import { connect } from 'react-redux';
 import './jumbotron.css';
-// import WeatherofPage from './WeatherOfCity';
-
  class Home extends Component {   
             
             render(){
-            
-        let imgUrl = './weather.jpg';
-        let stylesdiv = {
-        root: {
-            backgroundImage: 'url(' + imgUrl + ')',
-            backgroundSize: 'cover',
-            overflow: 'hidden',
-        }} 
                 return(
-                   <div style={stylesdiv}>
+                   <div >
                     <div className="jumbotron text-center ">
                             <h1 className="header">Enter city state name</h1>
                         <WeatherFrom />

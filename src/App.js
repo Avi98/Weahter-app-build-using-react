@@ -16,7 +16,7 @@ axios.get('http://ipinfo.io')
 }
   render() {
     return (
-      <div>
+      <div className="container-fluid ">
         <Header ipData={this.props.ipTemp}/>
       <div className="App">
        {this.props.children}       

@@ -6,8 +6,3 @@
    font-weight: normal  !important; 
    text-shadow: 0 1px 1px #d54d7b  !important; 
 }
-
-.jumbotron {
-   background: rgb(232, 247, 200) !important; /* This is for ie8 and below */
-   background: rgba(232, 247, 200, 0.5) !important; 
-}
