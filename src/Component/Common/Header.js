@@ -1,5 +1,4 @@
   import React,{Component} from 'react';
-  import me from './me.jpg';
 
   class Header extends Component{
   constructor(props){
