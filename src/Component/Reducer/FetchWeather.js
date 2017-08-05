@@ -6,7 +6,7 @@ export default function FetchWeatherReducer(state = [], action){
              return {cityName:action.main}
         
         case types.FETCH_WEATHER_ERROR: 
-             return state.concat([action.error]);
+             return action.error;
 
         default : return state;
 

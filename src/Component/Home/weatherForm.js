@@ -20,28 +20,47 @@ class WeatherForm extends Component {
         this.HandelSubmit = this.HandelSubmit.bind(this);
         this.handelLoadingandMessage = this.handelLoadingandMessage.bind(this);
         this.onTempChange = this.onTempChange.bind(this);
+        this.FetchWeatherForecast = this.FetchWeatherForecast.bind(this);
+        this.onclick = this.onclick.bind(this);
+        this.forecast = this.forecast.bind(this);
     }
-
-    HandelSubmit(event) {
+    onclick(event) {
         event.preventDefault();
-        let key="weather";
+        this.HandelSubmit();
+        this.FetchWeatherForecast();
+    }
+    HandelSubmit() {
+        let key = "weather";
         let location = this.refs.googgleAutoCompleted.getLocation();
         this.props.locationName(location);
-        this.props.fetchWeather(location,key).then(this.handelLoadingandMessage())
+        this.props.fetchWeather(location, key).then(this.handelLoadingandMessage())
             .catch((error) => {
                 toastr.error(error);
             });
 
     }
-    FetchWeatherForecast(){
-        const forecast="forecast";
-         let location = this.refs.googgleAutoCompleted.getLocation();
+    FetchWeatherForecast() {
+        const forecast = "forecast";
+        let location = this.refs.googgleAutoCompleted.getLocation();
         this.props.locationName(location);
-        this.props.fetchWeather(location,forecast);
-
+        this.props.fetchWeather(location, forecast)
+        .then(this.forecast());
     }
-    handelLoadingandMessage() {
+
+    forecast(){
+         let {weatherForecast} = this.props;
+        //call weatherForcaste here
+        console.log('====================================');
+        console.log(weatherForecast);
+        console.log('====================================');
+       
+           <ForcastList weather_forecast={weatherForecast} />
         
+       
+    }
+
+    handelLoadingandMessage() {
+
         let { loading, cityName, weatherData } = this.props;
         if (loading) {
             return <Spinner name="pacman" />;
@@ -54,11 +73,7 @@ class WeatherForm extends Component {
                         location={cityName.location}
                         weather={weatherData}
                         temp_option={this.state.selectedOption} />
-
-                    <ForcastList location={cityName.location}
-                        temp_option={this.state.selectedOption}
-                       
-                         />
+                    <ForcastList weather_forecast={this.props.weatherForecast} />
                 </div>
             );
         }
@@ -75,7 +90,7 @@ class WeatherForm extends Component {
 
         return (
             <div>
-                <form onSubmit={this.HandelSubmit}>
+                <form onSubmit={this.onclick}>
                     <div className="form-group">
                         <GoogleAutoCompleted ref="googgleAutoCompleted" />
                         <fieldset>
@@ -120,14 +135,16 @@ const mapStateToProps = (state) => {
         weatherData: state.FetchWeather,
         loading: state.BeginAjaxCallReducer === 1,
         temp_types: state.TempType,
-        ipLocation: state.GetIpLocation
+        ipLocation: state.GetIpLocation,
+        weatherForecast: state.FetchForecast
+
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         locationName: location => dispatch(GetUserInput(location)),
-        fetchWeather:( location,key) => dispatch(Weather(location,key)),
-        temp_send: temps => dispatch(tempType(temps))
+        fetchWeather: (location, key) => dispatch(Weather(location, key)),
+        temp_send: temps => dispatch(tempType(temps)),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherForm);

@@ -12,7 +12,6 @@ import moment from 'moment';
                     <div className="jumbotron text-center ">
                             <h1 className="header">Enter city state name</h1>
                         <WeatherFrom />
-                       {/*{this.renderMessage} */}
                         </div>
                     </div>    
                 );

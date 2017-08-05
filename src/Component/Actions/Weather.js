@@ -48,12 +48,9 @@ export const Weather = (location,key) => {
         dispatch(BeginAjaxCall());
         return axios.get(requestUrl)
             .then(response => {
-                if (response.data.cod !== 200 && response.data.message) {
-                    dispatch(ErrorHandel(response.data.message));
-                }
-                else {
+               
                     dispatch(fetchForecastSucess(response.data));
-                }
+                
             }).catch(error => {
                 dispatch(AjaxCallError());
                 throw (error);
