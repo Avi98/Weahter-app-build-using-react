@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import WeatherFrom from './weatherForm';
 import { connect } from 'react-redux';
 import './jumbotron.css';
+import moment from 'moment';
+
  class Home extends Component {   
             
             render(){

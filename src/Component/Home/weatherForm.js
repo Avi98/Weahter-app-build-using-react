@@ -7,6 +7,7 @@ import { Weather } from '../Actions/Weather';
 import WeatherMessage from './WeatherMessage';
 import { tempType } from '../Actions/TempType';
 import toastr from 'toastr';
+import ForcastList from './ForcastList';
 
 
 class WeatherForm extends Component {
@@ -23,23 +24,43 @@ class WeatherForm extends Component {
 
     HandelSubmit(event) {
         event.preventDefault();
+        let key="weather";
         let location = this.refs.googgleAutoCompleted.getLocation();
         this.props.locationName(location);
-        this.props.fetchWeather(location).then(this.handelLoadingandMessage())
+        this.props.fetchWeather(location,key).then(this.handelLoadingandMessage())
             .catch((error) => {
                 toastr.error(error);
             });
 
     }
+    FetchWeatherForecast(){
+        const forecast="forecast";
+         let location = this.refs.googgleAutoCompleted.getLocation();
+        this.props.locationName(location);
+        this.props.fetchWeather(location,forecast);
 
+    }
     handelLoadingandMessage() {
+        
         let { loading, cityName, weatherData } = this.props;
         if (loading) {
             return <Spinner name="pacman" />;
         }
         else if (typeof cityName.location !== 'undefined') {
 
-            return <WeatherMessage location={cityName.location} weather={weatherData} temp_option={this.state.selectedOption} />;
+            return (
+                <div>
+                    <WeatherMessage
+                        location={cityName.location}
+                        weather={weatherData}
+                        temp_option={this.state.selectedOption} />
+
+                    <ForcastList location={cityName.location}
+                        temp_option={this.state.selectedOption}
+                       
+                         />
+                </div>
+            );
         }
     }
     onTempChange(event) {
@@ -53,7 +74,7 @@ class WeatherForm extends Component {
         let fharenhite = { checked: this.state.selectedOption === 'F' };
 
         return (
-codeRefactoring             <div>
+            <div>
                 <form onSubmit={this.HandelSubmit}>
                     <div className="form-group">
                         <GoogleAutoCompleted ref="googgleAutoCompleted" />
@@ -105,7 +126,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         locationName: location => dispatch(GetUserInput(location)),
-        fetchWeather: location => dispatch(Weather(location)),
+        fetchWeather:( location,key) => dispatch(Weather(location,key)),
         temp_send: temps => dispatch(tempType(temps))
     };
 };

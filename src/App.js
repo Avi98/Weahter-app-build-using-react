@@ -8,9 +8,10 @@ import  { Weather } from '../src/Component/Actions/Weather';
 
 class App extends Component {
 componentDidMount(){
+  let key ="weather"
 axios.get('http://ipinfo.io')
         .then((res)=>{
-            this.props.dispatch(Weather(res.data.city));
+            this.props.dispatch(Weather(res.data.city,key));
         });
   
 }

@@ -9,19 +9,21 @@ export const GetLocation = () => {
             .then((res) => {
                 Weather(res.data.city);
             });
-    }
-}
+    };
+};
 
-export const Weather = (location) => {
+export const Weather = (location,key) => {
 
     let zipCode = /^\d{5}$/.test(location);
-    let Default_units = 'imperial';
+    let Default_units = "imperial";
     let apiKey = "dec9418cc405ebba43dacfdc87713161";
     const encodedLocation = encodeURIComponent(location);
-    const url = "http://api.openweathermap.org/data/2.5/weather?&APPID=";
-    let requestUrl = `${url}${apiKey}&units=${Default_units}`;
+    const url = "http://api.openweathermap.org/data/2.5/";
+    let requestUrl = `${url}${key}?appid=${apiKey}&units=${Default_units}`;
     requestUrl += zipCode ? `zip=${encodedLocation}` : `&q=${encodedLocation}`;
-    return (dispatch) => {
+   
+    if(key==="weather"){ 
+        return (dispatch) => {
         dispatch(BeginAjaxCall());
         return axios.get(requestUrl)
             .then(response => {
@@ -37,6 +39,33 @@ export const Weather = (location) => {
             });
     };
 }
+    else{
+        //dispatch new thunk over here in which new action 
+        // will be there and action will be call  NEW reducer which will //
+        //set new state for FORECASTE 
+
+        return (dispatch) => {
+        dispatch(BeginAjaxCall());
+        return axios.get(requestUrl)
+            .then(response => {
+                if (response.data.cod !== 200 && response.data.message) {
+                    dispatch(ErrorHandel(response.data.message));
+                }
+                else {
+                    dispatch(fetchForecastSucess(response.data));
+                }
+            }).catch(error => {
+                dispatch(AjaxCallError());
+                throw (error);
+            });
+    };
+    }
+};
+
+export const fetchForecastSucess=(forecast) =>({
+    type:types.FETCH_FORECAST_SUCESS,
+    forecast
+})
 
 export const fetchWeatherSucess = (main) => ({
     type: types.FETCH_WEATHER_SUCESS,
