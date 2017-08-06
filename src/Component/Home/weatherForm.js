@@ -54,7 +54,7 @@ class WeatherForm extends Component {
         console.log(weatherForecast);
         console.log('====================================');
        
-           <ForcastList weather_forecast={weatherForecast} />
+           <ForcastList weather_forecast={weatherForecast} />;
         
        
     }
