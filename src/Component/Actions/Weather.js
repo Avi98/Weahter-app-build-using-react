@@ -61,7 +61,6 @@ export const Weather = (location,key) => {
 
 export const fetchForecastSucess=(forecast) =>({
     type:types.FETCH_FORECAST_SUCESS,
-    forecastList:forecast.list,
     forecast:forecast.list.filter((forecast, index) => index % 8=== 0)
 })
 

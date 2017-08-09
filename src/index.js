@@ -9,7 +9,7 @@ import ConfigureStore from './Component/Store/ConfigStore';
 import { Weather } from './Component/Actions/Weather';
 import { GetLocation } from './Component/Actions/Weather';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import './vendor/weatherIcon/css/weatherIcons.css';
 
 const store=ConfigureStore();
  store.dispatch(GetLocation());

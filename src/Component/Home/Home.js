@@ -5,15 +5,17 @@ import './jumbotron.css';
 import moment from 'moment';
 
  class Home extends Component {   
-            
+            constructor(props){
+                super(props);
+            }
+          
             render(){
                 return(
                    <div >
-                    <div className="jumbotron text-center ">
-                            <h1 className="header">Enter city state name</h1>
+                    
                         <WeatherFrom />
                         </div>
-                    </div>    
+                    
                 );
             }
  }
@@ -22,8 +24,8 @@ function mapStateToProps(state){
     return {
         userInput:state.GetUserInput,
         weatherData:state.FetchWeather,
-        tempTypes:state.TempType
-
+        tempTypes:state.TempType,
+        weatherForecast: state.FetchForecast.filterlist
     }
 }
 

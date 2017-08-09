@@ -7,10 +7,10 @@ import * as types from '../Actions/types';
         case types.FETCH_FORECAST_SUCESS:return Object.assign(
             {},
             ...state,
-            {forecast:{
-                filterlist:action.forecast,
-                List:action.forecastList
-            }});  
+            {
+                filterlist:action.forecast
+              
+        });  
 
         default: return state;
     }
