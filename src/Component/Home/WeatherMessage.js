@@ -8,10 +8,11 @@ import React from 'react';
         tempdata = (tempdata - 32) * (5/9);
         tempdata = tempdata.toFixed(2);
     }
+   
 
     return(
-        <div>  
-        <p> its {tempdata} {temp_option} temp in {location} </p>
+        <div >  
+        <h4 className="text"> its {tempdata} {temp_option} temp in {location} </h4>
         </div>
     );
     };
