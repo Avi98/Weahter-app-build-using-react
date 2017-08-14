@@ -115,6 +115,7 @@ class WeatherForm extends Component {
 
                                      </label>
                         </fieldset><br />
+                        <p> *pls click twice on get Weather app  </p>
                         <button className="btn btn-default"> Get Weather</button>
                     </div>
                 </form>

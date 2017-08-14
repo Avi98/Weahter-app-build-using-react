@@ -27,11 +27,10 @@ const weatherIconWraper={
            <div className="card-block">
             <h4 className="card-title">{props.date}</h4>
             <ul className="list-group list-group-flash">
-              <li className="list-group-item">{tempdata} * {props.temp_option}</li>
-              <li className="list-group-item">{props.temp_high}</li>
-              <li className="list-group-item">{props.temp_low}</li>
-              <li className="list-group-item">{props.weather_type}</li>
-              <li className="list-group-item">{props.humidity}</li>
+              <li className="list-group-item">The temp is {tempdata} * {props.temp_option}</li>
+              <li className="list-group-item">Max temp: {props.temp_high}</li>
+              <li className="list-group-item">Min temp: {props.temp_low}</li>
+              <li className="list-group-item">there will be {props.weather_type}</li>
             </ul>
             
            </div>
